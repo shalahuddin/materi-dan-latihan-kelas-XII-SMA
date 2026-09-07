@@ -85,3 +85,68 @@ Subtotal Pesanan: Rp 30000
 ```
 
 ---
+
+
+## 🔹 SOAL 2: Modul Kalkulasi Diskon, Kemasan & Pembayaran (Tahap 2)
+
+### 🎯 Tujuan
+Menerapkan perhitungan potongan diskon, penentuan biaya kemasan, dan pemilihan metode pembayaran menggunakan **Operator Ternary (`? :`)** dan **`if-else`**.
+
+### 📖 Deskripsi Kasus
+Melanjutkan dari subtotal yang diperoleh pada Soal 1, sistem sekarang meminta informasi tipe penyajian (*Dine-In* vs *Takeaway*), memeriksa apakah pembeli memiliki **Kartu Siswa LABS**, serta menentukan metode pembayaran.
+
+### ⚙️ Spesifikasi & Aturan Logika
+1. **Biaya Kemasan (Wajib Operator Ternary `? :`):**
+   - Input: Tipe Penyajian (`1` = Dine-in / Makan di tempat, `2` = Takeaway / Bungkus).
+   - Jika Takeaway (`2`), dikenakan biaya kemasan ramah lingkungan sebesar **Rp 2.000**, jika Dine-in biaya = **Rp 0**.
+2. **Diskon Pelajar LABS (Wajib Operator Ternary `? :`):**
+   - Input: Status Kartu Siswa (`1` = Punya, `0` = Tidak Punya).
+   - Jika `1` (Punya), dapatkan diskon sebesar **10%** dari subtotal pesanan. Jika `0`, diskon = **Rp 0**.
+3. **Pilihan Jalur Pembayaran (`if-else` atau `switch`):**
+   - `1` = Tunai / Cash (Uang pas atau kembalian dihitung).
+   - `2` = Kartu Saldo Digital LABS (*Smart Card*).
+
+### 🖥️ Contoh Output yang Diharapkan (Soal 2)
+```text
+Subtotal Menu: Rp 30000
+
+Tipe Penyajian:
+1. Dine-In (Makan di Tempat)
+2. Takeaway (Bungkus)
+Pilih (1/2): 2
+
+Status Kepemilikan Kartu Siswa LABS? (1 = Ya, 0 = Tidak): 1
+
+==================================================
+               RINCIAN PEMBAYARAN                 
+==================================================
+Subtotal Makanan   : Rp 30000
+Diskon Siswa (10%) : Rp 3000
+Biaya Kemasan      : Rp 2000
+--------------------------------------------------
+TOTAL AKHIR BAYAR  : Rp 29000
+==================================================
+```
+
+---
+
+## 🔹 SOAL 3: Integrasi Sistem Lengkap Kios Cerdas LABS (Tahap 3 - Final)
+
+### 🎯 Tujuan
+Menggabungkan **Soal 1** dan **Soal 2** ke dalam satu program utuh yang terstruktur, serta menambahkan **sistem validasi saldo kartu siswa**, **proteksi limit transaksi harian**, dan **pencetakan struk pembayaran resmi**.
+
+### 📖 Deskripsi Kasus
+Gabungkan seluruh komponen kode program dari Soal 1 dan Soal 2. Pada tahap final ini, jika pembeli memilih pembayaran via **Kartu Saldo LABS**, program harus memeriksa apakah saldo mencukupi dan tidak melebihi batas maksimal jajan harian sekolah (Maksimal Rp 50.000 per transaksi).
+
+### ⚙️ Spesifikasi & Aturan Tambahan (Integrasi Penuh)
+1. **Inisialisasi Data Pengguna:**
+   - Saldo awal Kartu Siswa ditentukan sebesar: **Rp 45.000**.
+   - Batas Limit Transaksi Harian: **Rp 50.000**.
+2. **Logika Validasi Pembayaran Digital (Wajib `nested if-else` & `guard clauses`):**
+   - Jika Total Bayar > Rp 50.000: Batalkan transaksi dengan pesan `"[DITOLAK] Transaksi melebihi limit jajan harian siswa (Maks Rp 50.000)!"`.
+   - Jika Saldo Kartu < Total Bayar: Batalkan transaksi dengan pesan `"[GAGAL] Saldo kartu tidak mencukupi! Sisa saldo Anda: Rp ..."`
+   - Jika Saldo Mencukupi: Kurangi saldo kartu dengan total bayar dan cetak pesan `"[BERHASIL] Pembayaran sukses via Kartu Siswa LABS"`.
+3. **Pencetakan Struk Resmi:**
+   - Tampilkan rincian pesanan lengkap, status diskon, tipe penyajian, metode bayar, dan sisa saldo/kembalian.
+
+---
